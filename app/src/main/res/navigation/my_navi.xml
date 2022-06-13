@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_navi"
+    app:startDestination="@id/addingFragment">
+
+    <fragment
+        android:id="@+id/addingFragment"
+        android:name="com.example.databasetesting.fragments.add.AddingFragment"
+        android:label="AddingFragment" >
+        <action
+            android:id="@+id/action_addingFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.databasetesting.fragments.list.ListFragment"
+        android:label="ListFragment" >
+        <action
+            android:id="@+id/action_listFragment_to_addingFragment"
+            app:destination="@id/addingFragment" />
+    </fragment>
+</navigation>
