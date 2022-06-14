@@ -36,12 +36,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editFirstName" />
 
     <EditText
-        android:id="@+id/editPhoneNumber"
+        android:id="@+id/editAge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Phone Number"
+        android:hint="Your Age"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -57,5 +57,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPhoneNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/editAge" />
 </androidx.constraintlayout.widget.ConstraintLayout>
