@@ -14,6 +14,10 @@ import com.example.roomapp.adapter.ListViewAdapter
 import com.example.roomapp.data.UserViewModel
 import com.example.roomapp.databinding.FragmentListBinding
 import kotlinx.android.synthetic.main.fragment_list.view.*
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
+
 
 class ListFragment : Fragment() {
 

@@ -10,4 +10,7 @@ class UserRepository(private val userDao: UserDao) {
         userDao.addUser(user)
     }
 
+    suspend fun updateUser(user: User){
+        userDao.update(user)
+    }
 }

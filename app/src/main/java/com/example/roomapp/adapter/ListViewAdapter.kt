@@ -2,8 +2,11 @@ package com.example.roomapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.databasetesting.fragments.list.ListFragmentDirections
 import com.example.roomapp.R
+import com.example.roomapp.UpdateFragmentDirections
 import com.example.roomapp.data.User
 import com.example.roomapp.databinding.CustomRowBinding
 import kotlinx.android.synthetic.main.custom_row.view.*
@@ -31,6 +34,11 @@ class ListViewAdapter :RecyclerView.Adapter<ListViewAdapter.CustomListViewViewHo
             textFirstName.text = current.firstName.toString()
             textLastName.text = current.lastName.toString()
             textAge.text = current.age.toString()
+        }
+
+        holder.binding.rootLayout.setOnClickListener {
+            val action1 = ListFragmentDirections.actionListFragmentToUpdateFragment(current)
+            holder.binding.root.findNavController().navigate(action1)
         }
 
     }
