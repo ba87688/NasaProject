@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.example.roomapp.UpdateFragment"
+        android:name="com.example.roomapp.fragments.update.UpdateFragment"
         android:label="Update" >
         <argument
             android:name="currentUser"

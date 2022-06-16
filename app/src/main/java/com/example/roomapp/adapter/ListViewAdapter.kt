@@ -6,7 +6,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.databasetesting.fragments.list.ListFragmentDirections
 import com.example.roomapp.R
-import com.example.roomapp.UpdateFragmentDirections
 import com.example.roomapp.data.User
 import com.example.roomapp.databinding.CustomRowBinding
 import kotlinx.android.synthetic.main.custom_row.view.*
