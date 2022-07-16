@@ -42,16 +42,16 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener{
 
         Log.i(TAG, "Ass: ${v.createList()}")
 
-//        lifecycleScope.launchWhenCreated {
-//
-//            Log.i("TAG", "onCreate1: ")
-//
-//            val re = RetrofitInstance.api.getAstroids2()
-//            Log.i("TAG", "onCreate2:${(re.body())} ")
-//            val list = re.body()?.near_earth_objects?.`2015-09-07`
-//            r = list!!
-//            val adapt = AstroidAdapter2(r!!, this@MainFragment)
-//            binding.recyclerview.adapter = adapt
+        lifecycleScope.launchWhenCreated {
+
+            Log.i("TAG", "onCreate1: ")
+
+            val re = RetrofitInstance.api.getAstroids()
+            Log.i("TAG", "onCreate2:${(re.body())} ")
+            val list = re.body()?.near_earth_objects?.`2015-09-07`
+            r = list!!
+            val adapt = AstroidAdapter2(r!!, this@MainFragment)
+            binding.recyclerview.adapter = adapt
 //
 //            Log.i("TAGE", "onCreate: $r")
 //
@@ -62,7 +62,7 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener{
 //
 //            }
 //
-//        }
+        }
 
 
 
