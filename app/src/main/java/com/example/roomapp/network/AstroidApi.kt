@@ -34,14 +34,14 @@ interface AstroidApi {
     suspend fun getAstroids(): Response<AstroidApiModel>
 
 //    @GET("/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY")
-////    @GET("/neo/rest/v1/feed")
-//    suspend fun getAstroids2(
-////        @Query("start_date") searchTerm: String = "2015-09-07",
-////        @Query("end_date") searchTerm2: String = "2015-09-08",
-////        @Query("api_key") autheader: String = "$API_KEY"
-//
-//
-//        ): Response<AstroidApiModel>
+    @GET("/neo/rest/v1/feed")
+    suspend fun getAstroids2(
+        @Query("start_date") searchTerm: String = "2015-09-07",
+        @Query("end_date") searchTerm2: String = "2015-09-08",
+        @Query("api_key") autheader: String = "$API_KEY"
+
+
+        ): Response<AstroidApiModel>
 
 
 //

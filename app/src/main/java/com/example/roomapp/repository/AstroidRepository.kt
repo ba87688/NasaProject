@@ -10,7 +10,7 @@ class AstroidRepository {
 
     suspend fun getAstroid(): AstroidApiModel? {
 
-        val re = service.getAstroids()
+        val re = service.getAstroids2()
         return re.body()
     }
 }
