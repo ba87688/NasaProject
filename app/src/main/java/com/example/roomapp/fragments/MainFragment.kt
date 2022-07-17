@@ -72,15 +72,16 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener{
         lifecycleScope.launch {
 
 
+            v.initializeTonight()
 
-            var data = AstroidRoomDatabase.getInstance(this@MainFragment.requireContext())
-            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidRoomDatabase::class.java, "MyDatabase").allowMainThreadQueries().build()
-
-
-            var data2 = data.assDatabaseDao
-            data2.insert(Ass(11,1,"name"))
-
-            Log.i(TAG, "onCreatedView: ${data2.get(11)}")
+//            var data = AstroidRoomDatabase.getInstance(this@MainFragment.requireContext())
+//            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidRoomDatabase::class.java, "MyDatabase").allowMainThreadQueries().build()
+//
+//
+//            var data2 = data.assDatabaseDao
+//            data2.insert(Ass(11,1,"name"))
+//
+//            Log.i(TAG, "onCreatedView: ${data2.get(11)}")
 
 
         }
