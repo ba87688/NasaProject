@@ -23,6 +23,20 @@ class AstroidRepository (private val database: AstroidMadeDatabase){
         return database.assDatabaseDao.getAllNights()
     }
 
+    suspend fun insertList(astroidList: MutableList<AstroidMade>){
+        database.assDatabaseDao.insertList(astroidList)
+    }
+
+    suspend fun insert(astroid: AstroidMade){
+        database.assDatabaseDao.insert(astroid)
+    }
+    fun get(key:Int) : AstroidMade{
+        return database.assDatabaseDao.get(key)
+    }
+
+
+
+
 
 
 }
