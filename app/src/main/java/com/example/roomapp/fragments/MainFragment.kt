@@ -32,6 +32,7 @@ import com.example.roomapp.database.AstroidMadeDatabase
 import com.example.roomapp.database.AstroidRoomDatabase
 import com.example.roomapp.databinding.FragmentMainBinding
 import com.example.roomapp.model.Ass
+import com.example.roomapp.repository.AstroidRepository
 import com.example.roomapp.viewModel.AstroidMainViewModel
 import com.example.roomapp.viewModel.AstroidMainViewModelFactory
 import kotlinx.coroutines.launch
@@ -57,7 +58,7 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 //       viewmodel reference application
         val application = requireNotNull(this.activity).application
         //reference datasource
-        val dataSource = AstroidRoomDatabase.getInstance(application).assDatabaseDao
+        val dataSource = AstroidMadeDatabase.getInstance(application)
         //create viewmodel factory that takes in application and datasoruce
         val viewModelFactory = AstroidMainViewModelFactory(dataSource,application)
 
@@ -131,12 +132,6 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
             Log.i(TAG, "database item: ${data2.get(3726788)}")
 
 
-            var liveDa = data2.getAllNights()
-            liveDa.observe(viewLifecycleOwner, Observer { it ->
-                Log.i(TAG, "inside live data: $it")
-
-            })
-            Log.i(TAG, "database item: ${liveDa.value}")
 
             Log.i("STRONG?", "onCreateView: $d")
             val adapt = AstroMadeAdapter(d,this@MainFragment)
@@ -156,6 +151,21 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
             }
 
             Log.i(TAG, "format dates: ${formattedDateList.toString()}")
+
+
+
+            val reposiotry = AstroidRepository(dataSource)
+            val dae = reposiotry.getAstroid(formattedDateList[0],formattedDateList[1])
+            Log.i(TAG, "format of re: ${dae.toString()}")
+
+
+            var liveDa = reposiotry.getAllNights()
+            liveDa.observe(viewLifecycleOwner, Observer { it ->
+                Log.i(TAG, "inside live data: $it")
+
+            })
+            Log.i(TAG, "database item: ${liveDa.value}")
+
 
 
             //getting list of astroids for latest dates!

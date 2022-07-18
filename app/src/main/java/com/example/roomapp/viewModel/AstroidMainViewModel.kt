@@ -3,18 +3,14 @@ package com.example.roomapp.viewModel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.astroidnasa.network.RetrofitInstance
 import com.example.astroidnasa.retrofitmodels.AstroidApiModel
-import com.example.roomapp.api.parseAsteroidsJsonResult
-import com.example.roomapp.database.AssInterfaceDao
-import com.example.roomapp.database.AstroidRoomDatabase
+import com.example.roomapp.database.AstroidMadeDatabase
 import com.example.roomapp.repository.AstroidRepository
 import kotlinx.coroutines.*
 
 class AstroidMainViewModel(
-    val database:AssInterfaceDao, application: Application
+    val database:AstroidMadeDatabase, application: Application
 ): AndroidViewModel(application) {
 
 
@@ -27,7 +23,7 @@ class AstroidMainViewModel(
 
     init {
 
-        repository = AstroidRepository()
+        repository = AstroidRepository(database)
         createList()
 
 //        initializeTonight()
