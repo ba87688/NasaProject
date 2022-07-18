@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
@@ -123,6 +124,14 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
             Log.i(TAG, "database item: ${data2.get(2440012)}")
             Log.i(TAG, "database item: ${data2.get(3713989)}")
             Log.i(TAG, "database item: ${data2.get(3726788)}")
+
+
+            var liveDa = data2.getAllNights()
+            liveDa.observe(viewLifecycleOwner, Observer { it ->
+                Log.i(TAG, "inside live data: $it")
+
+            })
+            Log.i(TAG, "database item: ${liveDa.value}")
 
             Log.i("STRONG?", "onCreateView: $d")
             val adapt = AstroMadeAdapter(d,this@MainFragment)

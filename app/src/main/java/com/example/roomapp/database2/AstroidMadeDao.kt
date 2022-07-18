@@ -1,5 +1,6 @@
 package com.example.roomapp.database2
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -18,6 +19,9 @@ interface AstroidMadeDao {
 
     @Query("SELECT * from astroid_table WHERE id=:key")
     fun get(key:Int) : AstroidMade
+
+    @Query("SELECT * FROM astroid_table ORDER BY id DESC")
+    fun getAllNights(): LiveData<List<AstroidMade>>
 
 
 }
