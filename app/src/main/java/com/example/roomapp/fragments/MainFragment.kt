@@ -21,6 +21,7 @@ import com.example.astroidnasa.adapter.AstroidAdapter2
 import com.example.astroidnasa.network.RetrofitInstance
 import com.example.astroidnasa.retrofitmodels.X20150907
 import com.example.roomapp.R
+import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidRoomDatabase
 import com.example.roomapp.databinding.FragmentMainBinding
 import com.example.roomapp.model.Ass
@@ -73,6 +74,11 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener{
 
 
             v.initializeTonight()
+
+            val re = RetrofitInstance.api.getAstroids()
+            val s = re.body()!!
+            val d = parseAstroid(s)
+            Log.i("RETROLIST", "createList: $d")
 
 //            var data = AstroidRoomDatabase.getInstance(this@MainFragment.requireContext())
 //            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidRoomDatabase::class.java, "MyDatabase").allowMainThreadQueries().build()

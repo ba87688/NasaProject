@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.astroidnasa.network.RetrofitInstance
 import com.example.astroidnasa.retrofitmodels.AstroidApiModel
+import com.example.roomapp.api.parseAsteroidsJsonResult
 import com.example.roomapp.database.AssInterfaceDao
 import com.example.roomapp.database.AstroidRoomDatabase
 import com.example.roomapp.repository.AstroidRepository
@@ -59,6 +60,8 @@ class AstroidMainViewModel(
             val re = RetrofitInstance.api.getAstroids()
             s = re.body()!!
             Log.i("RETRO", "createList: $s")
+
+//
 
 //            s = repository.getAstroid()!!
 
