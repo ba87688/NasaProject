@@ -29,9 +29,6 @@ class AstroMadeAdapter (val list:List<AstroidMade>, private val listener: AstroM
         }
 
 
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AstroMadeViewHolder2 {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.astroid_list,parent,false)
         return AstroMadeViewHolder2(view)
@@ -39,7 +36,7 @@ class AstroMadeAdapter (val list:List<AstroidMade>, private val listener: AstroM
 
     override fun onBindViewHolder(holder: AstroMadeViewHolder2, position: Int) {
         holder.itemView.apply {
-            astroid_name.text =list[position].id
+            astroid_name.text =list[position].id.toString()
         }
     }
 

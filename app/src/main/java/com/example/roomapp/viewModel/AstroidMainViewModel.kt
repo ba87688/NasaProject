@@ -16,17 +16,13 @@ import kotlinx.coroutines.*
 class AstroidMainViewModel(
     val database:AssInterfaceDao, application: Application
 ): AndroidViewModel(application) {
+
+
     private lateinit var repository: AstroidRepository
     private lateinit var s : AstroidApiModel
 
 //    lateinit var astroidList: MutableLiveData<>
 
-//    to do 1. initialize a job to manage our courotines.
-    private var viewModelJob = Job()
-    //viewmodel job allows us to cancel all corotines. where will corotines come bak to?
-//    to do 2. cancel job in oncleared.
-//    to do 3. need  a scope for corotines to run in. we pass in dispatched and job
-    private val uiScope = viewModelScope
 
 
     init {
@@ -34,25 +30,25 @@ class AstroidMainViewModel(
         repository = AstroidRepository()
         createList()
 
-        initializeTonight()
+//        initializeTonight()
 
 
     }
-    fun initializeTonight(){
-        viewModelScope.launch{
-            val toe = getTonightFromDatabase()
-            Log.i("Scooby", "initializeTonight: $toe ")
-        }
-    }
-
-    private suspend fun getTonightFromDatabase(): String?{
-        return withContext(Dispatchers.IO){
-            var name = database.get(11).name
-            name.toString()
-
-        }
-
-    }
+//    fun initializeTonight(){
+//        viewModelScope.launch{
+//            val toe = getTonightFromDatabase()
+//            Log.i("Scooby", "initializeTonight: $toe ")
+//        }
+//    }
+//
+//    private suspend fun getTonightFromDatabase(): String?{
+//        return withContext(Dispatchers.IO){
+//            var name = database.get(11).name
+//            name.toString()
+//
+//        }
+//
+//    }
     fun createList(){
         viewModelScope.launch {
             Log.i("WTF viewmodel", "createList: WTF ")
@@ -75,7 +71,7 @@ class AstroidMainViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        viewModelScope.cancel()
     }
 
 

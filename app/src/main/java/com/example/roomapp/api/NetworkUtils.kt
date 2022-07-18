@@ -23,7 +23,7 @@ fun parseAstroid(a: AstroidApiModel): MutableList<AstroidMade>{
 
     var num = 0
     for (i in a.near_earth_objects.`2015-09-07`) {
-        val id = i.id
+        val id = i.id.toInt()
         val absoluteMagnitude = i.absolute_magnitude_h
         val estimatedDiameter: Double = i.estimated_diameter.feet.estimated_diameter_max
         val isPotentiallyHazardous: Boolean = i.is_potentially_hazardous_asteroid

@@ -22,6 +22,7 @@ import com.example.astroidnasa.network.RetrofitInstance
 import com.example.astroidnasa.retrofitmodels.X20150907
 import com.example.roomapp.R
 import com.example.roomapp.adapter.AstroMadeAdapter
+import com.example.roomapp.api.AstroidMade
 import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidRoomDatabase
 import com.example.roomapp.databinding.FragmentMainBinding
@@ -44,7 +45,6 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 
         val url = "https://apod.nasa.gov/apod/image/2001/STSCI-H-p2006a-h-1024x614.jpg"
         Glide.with(this@MainFragment).load(url).centerCrop().into(binding.imageOfTheDay)
-
 
 //       viewmodel reference application
         val application = requireNotNull(this.activity).application
@@ -74,21 +74,21 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
         lifecycleScope.launch {
 
 
-            v.initializeTonight()
+//            v.initializeTonight()
 
             val re = RetrofitInstance.api.getAstroids()
             val s = re.body()!!
             val d = parseAstroid(s)
             Log.i("RETROLIST", "createList: $d")
 
-//            var data = AstroidRoomDatabase.getInstance(this@MainFragment.requireContext())
-//            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidRoomDatabase::class.java, "MyDatabase").allowMainThreadQueries().build()
-//
-//
+//            var data = AstroidMadeDatabase.getInstance(this@MainFragment.requireContext())
+//            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidMadeDatabase::class.java, "MyDatabase").allowMainThreadQueries().build()
+////
+////
 //            var data2 = data.assDatabaseDao
-//            data2.insert(Ass(11,1,"name"))
-//
-//            Log.i(TAG, "onCreatedView: ${data2.get(11)}")
+//            data2.insert(AstroidMade("11",11.2,11.33,true,33.3,33.32))
+////
+//            Log.i(TAG, "database item: ${data2.get("11")}")
 
 
         }
