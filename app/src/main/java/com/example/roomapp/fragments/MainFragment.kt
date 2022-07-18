@@ -3,6 +3,8 @@ package com.example.astroidnasa.fragments
 import android.app.Application
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -24,6 +26,7 @@ import com.example.astroidnasa.retrofitmodels.X20150907
 import com.example.roomapp.R
 import com.example.roomapp.adapter.AstroMadeAdapter
 import com.example.roomapp.api.AstroidMade
+import com.example.roomapp.api.Constants
 import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidMadeDatabase
 import com.example.roomapp.database.AstroidRoomDatabase
@@ -33,6 +36,8 @@ import com.example.roomapp.viewModel.AstroidMainViewModel
 import com.example.roomapp.viewModel.AstroidMainViewModelFactory
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeAdapter.OnItemClickListener{
     private lateinit var binding: FragmentMainBinding
@@ -137,6 +142,28 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
             val adapt = AstroMadeAdapter(d,this@MainFragment)
             binding.recyclerview.adapter = adapt
 //
+
+
+            Log.i(TAG, "format dates: ")
+            val formattedDateList = ArrayList<String>()
+
+            val calendar = Calendar.getInstance()
+            for (i in 0..1) {
+                val currentTime = calendar.time
+                val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
+                formattedDateList.add(dateFormat.format(currentTime))
+                calendar.add(Calendar.DAY_OF_YEAR, 1)
+            }
+
+            Log.i(TAG, "format dates: ${formattedDateList.toString()}")
+
+
+            //getting list of astroids for latest dates!
+            val re2 = RetrofitInstance.api.getAstroids2(formattedDateList[0],formattedDateList[1])
+            Log.i("TAG", "the king has returned:${(re.body())} ")
+//            r = list!!
+//            val adapt = AstroidAdapter2(r!!, this@MainFragment)
+//            val s = re.body()!!
 
 
         }
