@@ -12,6 +12,8 @@ interface AstroidMadeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(astroid: AstroidMade)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertList(astroidList: MutableList<AstroidMade>)
 
 
     @Query("SELECT * from astroid_table WHERE id=:key")

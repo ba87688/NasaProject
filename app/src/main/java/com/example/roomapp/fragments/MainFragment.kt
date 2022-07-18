@@ -95,9 +95,20 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
             Log.i(TAG, "database item: ${data2.get(11)}")
 
 
-        }
 
-        lifecycleScope.launchWhenCreated {
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             Log.i("TAG", "onCreate1: ")
 
@@ -108,9 +119,21 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 //            val adapt = AstroidAdapter2(r!!, this@MainFragment)
             val s = re.body()!!
             val d = parseAstroid(s)
+            data2.insertList(d)
+            Log.i(TAG, "database item: ${data2.get(2440012)}")
+            Log.i(TAG, "database item: ${data2.get(3713989)}")
+            Log.i(TAG, "database item: ${data2.get(3726788)}")
+
+            Log.i("STRONG?", "onCreateView: $d")
             val adapt = AstroMadeAdapter(d,this@MainFragment)
             binding.recyclerview.adapter = adapt
 //
+
+
+        }
+
+        lifecycleScope.launchWhenCreated {
+
 //            Log.i("TAGE", "onCreate: $r")
 //
 //
