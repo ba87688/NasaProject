@@ -30,7 +30,7 @@ class AstroidRepository (private val database: AstroidMadeDatabase){
     suspend fun insert(astroid: AstroidMade){
         database.assDatabaseDao.insert(astroid)
     }
-    fun get(key:Int) : AstroidMade{
+    suspend fun get(key:Int) : AstroidMade{
         return database.assDatabaseDao.get(key)
     }
 

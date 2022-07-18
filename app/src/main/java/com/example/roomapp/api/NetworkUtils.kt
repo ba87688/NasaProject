@@ -1,6 +1,7 @@
 package com.example.roomapp.api
 
 
+import android.content.ContentValues.TAG
 import android.os.Parcelable
 import android.util.Log
 import com.example.astroidnasa.retrofitmodels.AstroidApiModel
@@ -15,9 +16,10 @@ import kotlin.collections.ArrayList
 //                    val relativeVelocity: Double, val distanceFromEarth: Double,
 //                    val isPotentiallyHazardous: Boolean) : Parcelable
 
-fun parseAstroid(a: AstroidApiModel): MutableList<AstroidMade>{
+fun parseAstroid(a: AstroidApiModel): MutableList<AstroidMade> {
 
     var listA = mutableListOf<AstroidMade>()
+
 
     val near = a.near_earth_objects
 
@@ -27,23 +29,31 @@ fun parseAstroid(a: AstroidApiModel): MutableList<AstroidMade>{
         val absoluteMagnitude = i.absolute_magnitude_h
         val estimatedDiameter: Double = i.estimated_diameter.feet.estimated_diameter_max
         val isPotentiallyHazardous: Boolean = i.is_potentially_hazardous_asteroid
-        val kilometerPerSecond: Double = i.close_approach_data.get(0).relative_velocity.kilometers_per_second.toDouble()
-        val astronomical: Double =i.close_approach_data.get(0).miss_distance.astronomical.toDouble()
+        val kilometerPerSecond: Double =
+            i.close_approach_data.get(0).relative_velocity.kilometers_per_second.toDouble()
+        val astronomical: Double =
+            i.close_approach_data.get(0).miss_distance.astronomical.toDouble()
 
 
-        val astr = AstroidMade(id,absoluteMagnitude,estimatedDiameter,isPotentiallyHazardous,kilometerPerSecond,astronomical)
+        val astr = AstroidMade(
+            id,
+            absoluteMagnitude,
+            estimatedDiameter,
+            isPotentiallyHazardous,
+            kilometerPerSecond,
+            astronomical
+        )
 
         listA.add(astr)
     }
 
 
 
+
+
     return listA
 
-
-
 }
-
 
 
 fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
@@ -73,8 +83,10 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
                 val isPotentiallyHazardous = asteroidJson
                     .getBoolean("is_potentially_hazardous_asteroid")
 
-                val asteroid = Asteroid(id, codename, formattedDate, absoluteMagnitude,
-                    estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous)
+                val asteroid = Asteroid(
+                    id, codename, formattedDate, absoluteMagnitude,
+                    estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous
+                )
                 asteroidList.add(asteroid)
             }
         }
