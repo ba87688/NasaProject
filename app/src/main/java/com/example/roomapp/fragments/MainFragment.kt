@@ -24,12 +24,14 @@ import com.example.roomapp.R
 import com.example.roomapp.adapter.AstroMadeAdapter
 import com.example.roomapp.api.AstroidMade
 import com.example.roomapp.api.parseAstroid
+import com.example.roomapp.database.AstroidMadeDatabase
 import com.example.roomapp.database.AstroidRoomDatabase
 import com.example.roomapp.databinding.FragmentMainBinding
 import com.example.roomapp.model.Ass
 import com.example.roomapp.viewModel.AstroidMainViewModel
 import com.example.roomapp.viewModel.AstroidMainViewModelFactory
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeAdapter.OnItemClickListener{
     private lateinit var binding: FragmentMainBinding
@@ -76,19 +78,21 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 
 //            v.initializeTonight()
 
-            val re = RetrofitInstance.api.getAstroids()
-            val s = re.body()!!
-            val d = parseAstroid(s)
-            Log.i("RETROLIST", "createList: $d")
 
-//            var data = AstroidMadeDatabase.getInstance(this@MainFragment.requireContext())
-//            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidMadeDatabase::class.java, "MyDatabase").allowMainThreadQueries().build()
-////
-////
-//            var data2 = data.assDatabaseDao
-//            data2.insert(AstroidMade("11",11.2,11.33,true,33.3,33.32))
-////
-//            Log.i(TAG, "database item: ${data2.get("11")}")
+
+//            val re = RetrofitInstance.api.getAstroids()
+//            val s = re.body()!!
+//            val d = parseAstroid(s)
+//            Log.i("RETROLIST", "createList: $d")
+
+            var data = AstroidMadeDatabase.getInstance(this@MainFragment.requireContext())
+            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidMadeDatabase::class.java, "astroid_history").allowMainThreadQueries().build()
+//
+//
+            var data2 = data.assDatabaseDao
+            data2.insert(AstroidMade(11,11.2,11.33,true,33.3,33.32))
+//
+            Log.i(TAG, "database item: ${data2.get(11)}")
 
 
         }

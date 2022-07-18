@@ -1,3 +1,6 @@
+package com.example.roomapp.database
+
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -18,7 +21,7 @@ abstract class AstroidMadeDatabase : RoomDatabase(){
 
         fun getInstance(context: Context):AstroidMadeDatabase{
             synchronized(this){
-                var instance = INSTANCE
+                var instance = AstroidMadeDatabase.INSTANCE
                 if(instance == null){
                     instance = Room.databaseBuilder(
                         context.applicationContext,

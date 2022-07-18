@@ -53,9 +53,9 @@ class AstroidMainViewModel(
         viewModelScope.launch {
             Log.i("WTF viewmodel", "createList: WTF ")
 
-            val re = RetrofitInstance.api.getAstroids()
-            s = re.body()!!
-            Log.i("RETRO", "createList: $s")
+//            val re = RetrofitInstance.api.getAstroids()
+//            s = re.body()!!
+//            Log.i("RETRO", "createList: $s")
 
 //
 
