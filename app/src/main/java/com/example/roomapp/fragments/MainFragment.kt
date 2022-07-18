@@ -21,6 +21,7 @@ import com.example.astroidnasa.adapter.AstroidAdapter2
 import com.example.astroidnasa.network.RetrofitInstance
 import com.example.astroidnasa.retrofitmodels.X20150907
 import com.example.roomapp.R
+import com.example.roomapp.adapter.AstroMadeAdapter
 import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidRoomDatabase
 import com.example.roomapp.databinding.FragmentMainBinding
@@ -29,7 +30,7 @@ import com.example.roomapp.viewModel.AstroidMainViewModel
 import com.example.roomapp.viewModel.AstroidMainViewModelFactory
 import kotlinx.coroutines.launch
 
-class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener{
+class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeAdapter.OnItemClickListener{
     private lateinit var binding: FragmentMainBinding
     var r: List<X20150907>? =null
 
@@ -45,7 +46,7 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener{
         Glide.with(this@MainFragment).load(url).centerCrop().into(binding.imageOfTheDay)
 
 
-//        viewmodel reference application
+//       viewmodel reference application
         val application = requireNotNull(this.activity).application
         //reference datasource
         val dataSource = AstroidRoomDatabase.getInstance(application).assDatabaseDao
@@ -100,7 +101,10 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener{
             Log.i("TAG", "onCreate2:${(re.body())} ")
             val list = re.body()?.near_earth_objects?.`2015-09-07`
             r = list!!
-            val adapt = AstroidAdapter2(r!!, this@MainFragment)
+//            val adapt = AstroidAdapter2(r!!, this@MainFragment)
+            val s = re.body()!!
+            val d = parseAstroid(s)
+            val adapt = AstroMadeAdapter(d,this@MainFragment)
             binding.recyclerview.adapter = adapt
 //
 //            Log.i("TAGE", "onCreate: $r")
