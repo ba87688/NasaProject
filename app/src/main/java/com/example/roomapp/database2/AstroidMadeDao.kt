@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.roomapp.api.AstroidMade
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AstroidMadeDao {
@@ -23,5 +24,13 @@ interface AstroidMadeDao {
     @Query("SELECT * FROM astroid_table ORDER BY id DESC")
     fun getAllNights(): LiveData<List<AstroidMade>>
 
+    @Query("SELECT * FROM astroid_table ORDER BY id DESC")
+    fun getRestaurants(): Flow<List<AstroidMade>>
+
+    @Query("SELECT * FROM astroid_table ORDER BY id DESC")
+    fun getAllListNights(): List<AstroidMade>
+
+    @Query("DELETE FROM astroid_table")
+    suspend fun deleteAllAstroids()
 
 }

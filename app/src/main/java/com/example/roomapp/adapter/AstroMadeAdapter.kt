@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.astroid_list.view.*
 //, private val listener: AstroMadeAdapter.OnItemClickListener
 class AstroMadeAdapter (val list:List<AstroidMade>, private val listener: AstroMadeAdapter.OnItemClickListener):
         RecyclerView.Adapter<AstroMadeAdapter.AstroMadeViewHolder2>(){
-
+        private var list2:List<AstroidMade> = mutableListOf()
         inner class AstroMadeViewHolder2(itemView: View): RecyclerView.ViewHolder(itemView),
             View.OnClickListener{
             init {
@@ -42,6 +42,12 @@ class AstroMadeAdapter (val list:List<AstroidMade>, private val listener: AstroM
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    fun setAstroid(astroids:List<AstroidMade>){
+        this.list2 = astroids
+        notifyDataSetChanged()
+
     }
 
     interface OnItemClickListener{

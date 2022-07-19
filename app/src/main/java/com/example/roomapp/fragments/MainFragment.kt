@@ -3,8 +3,6 @@ package com.example.astroidnasa.fragments
 import android.app.Application
 import android.content.ContentValues
 import android.content.ContentValues.TAG
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,8 +12,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
@@ -41,6 +39,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.log
 
 class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeAdapter.OnItemClickListener{
     private lateinit var binding: FragmentMainBinding
@@ -79,9 +78,27 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 
         var v = ViewModelProvider(this).get(AstroidMainViewModel::class.java)
 
+        var adapter :AstroMadeAdapter
+        binding.apply {
+           
+            v.restaurants.observe(lifecycleOwner!!){ it->
+                Log.i(TAG, "retard: ${it.data}")
+                adapter = AstroMadeAdapter(it.data!!,this@MainFragment)
+                recyclerview.adapter = adapter
+            }
+        }
 
         lifecycleScope.launch {
 
+//            Log.i(TAG, "onCreateView: main frag started ${v.videolist.value}")
+//
+//            val d = v.getAstroid("2015-09-07","2015-09-08")
+//            val parsedData = v.parseData(d!!)
+//            val adapter = AstroMadeAdapter(parsedData,this@MainFragment)
+//
+//            withContext(Dispatchers.Main){
+//                binding.recyclerview.adapter = adapter
+//            }
 
 
 //            v.initializeTonight()
@@ -95,70 +112,7 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 
             var data = AstroidMadeDatabase.getInstance(this@MainFragment.requireContext())
             data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidMadeDatabase::class.java, "astroid_history").allowMainThreadQueries().build()
-//
-//
-            var data2 = data.assDatabaseDao
-//            data2.insert(AstroidMade(11,11.2,11.33,true,33.3,33.32))
-//
-//            Log.i(TAG, "database item: ${data2.get(11)}")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            withContext(Dispatchers.IO) {
-
-
-                val dates = v.getDates()
-                Log.i(TAG, "onCreateView: dates $dates")
-                val george = v.getAstroid(dates[0], dates[1])
-
-//            val re = RetrofitInstance.api.getAstroids2()
-                Log.i("TAG", "onCreate22:${(george.toString())} ")
-//            val list = re.body()?.near_earth_objects?.`2015-09-07`
-//            r = list!!
-//            val adapt = AstroidAdapter2(r!!, this@MainFragment)
-//            val s = re.body()!!
-                var d: MutableList<AstroidMade>? = null
-                if (george==null){
-                    Log.i(TAG, "it is null bro: ")
-                }
-                else{
-                   d= parseAstroid(george)
-                }
-
-                if(d!=null){
-                    withContext(Dispatchers.Main) {
-                        data2.insertList(d)
-                        val adapt = AstroMadeAdapter(d.toList(), this@MainFragment)
-                        binding.recyclerview.adapter = adapt
-                    }
-
-                }
-//                Log.i(TAG, "database item: ${data2.get(2440012)}")
-//                Log.i(TAG, "database item: ${data2.get(3713989)}")
-//                Log.i(TAG, "database item: ${data2.get(3726788)}")
-
-
-//                Log.i("STRONG?", "onCreateView: $d")
-
-//
-
-            }
-
-
-//            val reposiotry = AstroidRepository(dataSource)
-//            val dae = reposiotry.getAstroid(formattedDateList[0],formattedDateList[1])
-//            Log.i(TAG, "format of re: ${dae.toString()}")
 
 
             var liveDa = v.getLiveData()
@@ -170,28 +124,9 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 
 
 
-            //getting list of astroids for latest dates!
-//            val re2 = RetrofitInstance.api.getAstroids2(formattedDateList[0],formattedDateList[1])
-//            Log.i("TAG", "the king has returned:${(re.body())} ")
-//            r = list!!
-//            val adapt = AstroidAdapter2(r!!, this@MainFragment)
-//            val s = re.body()!!
-
 
         }
 
-        lifecycleScope.launchWhenCreated {
-
-//            Log.i("TAGE", "onCreate: $r")
-//
-//
-//            if (re.isSuccessful){
-//                Log.i("TAG", "onCreate: ${(re.body())}")
-//
-//
-//            }
-//
-        }
 
 
 

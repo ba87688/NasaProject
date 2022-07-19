@@ -5,13 +5,13 @@ import android.content.ContentValues
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.astroidnasa.fragments.MainFragment
 import com.example.astroidnasa.retrofitmodels.AstroidApiModel
+import com.example.roomapp.adapter.AstroMadeAdapter
 import com.example.roomapp.api.AstroidMade
 import com.example.roomapp.api.Constants
+import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidMadeDatabase
 import com.example.roomapp.repository.AstroidRepository
 import kotlinx.coroutines.*
@@ -23,30 +23,43 @@ class AstroidMainViewModel(
 ) : AndroidViewModel(application) {
 
 
-    private lateinit var repository: AstroidRepository
+    private var repository: AstroidRepository = AstroidRepository(database)
     private lateinit var s: AstroidApiModel
 
-    lateinit var astroidList: MutableLiveData<List<AstroidMade>>
+
+
+
+
+
+    val restaurants = repository.getRestaurants().asLiveData()
+
+
+    val videolist:LiveData<List<AstroidMade>>
+        get() = _astroidList
+    private val _astroidList = MutableLiveData<List<AstroidMade>>()
 
 
     init {
 
-        repository = AstroidRepository(database)
+
+//        repository = AstroidRepository(database)
+        createRestaurants()
         createList()
 
+        Log.i("Started", "viewmodel started: ")
 
 
     }
 
-//    private suspend fun getTonightFromDatabase(): String?{
-//        return withContext(Dispatchers.IO){
-//            var name = database.get(11).name
-//            name.toString()
-//        }
-//    }
+    fun createRestaurants(){
+        val restaurants = repository.getRestaurants().asLiveData()
+
+    }
+
 
     fun getLiveData(): LiveData<List<AstroidMade>> {
-        return repository.getAllNights()
+
+        return videolist
 
     }
 
@@ -62,36 +75,39 @@ class AstroidMainViewModel(
         repository.insertList(astroidList)
     }
 
+    fun parseData(d:AstroidApiModel):List<AstroidMade>{
+        return parseAstroid(d)
+    }
+
 
     //api call
     suspend fun getAstroid( a:String,b: String): AstroidApiModel? {
-
-
-
         val re = repository.getAstroid(a,b)
+
         return re
-    }
-    fun getDates():ArrayList<String>{
-        Log.i(ContentValues.TAG, "format dates: ")
-        val formattedDateList = ArrayList<String>()
-
-        val calendar = Calendar.getInstance()
-        for (i in 0..1) {
-            val currentTime = calendar.time
-            val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
-            formattedDateList.add(dateFormat.format(currentTime))
-            calendar.add(Calendar.DAY_OF_YEAR, 1)
-        }
-
-        Log.i("FROM VIEW", "getDates: ${formattedDateList[0]}")
-        return formattedDateList
 
     }
+
     fun createList() {
         viewModelScope.launch {
+            Log.i(ContentValues.TAG, "onCreateView: thread frag started")
+
             Log.i("WTF viewmodel", "createList: WTF ")
             withContext(Dispatchers.IO) {
-                repository.getAllNights()
+                val george = repository.getAstroid()
+                Log.i("WTF viewmodel", "createList: WTF ${george} ")
+
+                val data = parseData(george!!)
+
+
+                withContext(Dispatchers.Main) {
+
+                    _astroidList.value = data
+                    Log.i("WTF viewmodel", "createList: WTF ${_astroidList.value} ")
+                    Log.i("WTF viewmodel", "createList: WTF ${videolist.value} ")
+
+                }
+
 
 
             }
