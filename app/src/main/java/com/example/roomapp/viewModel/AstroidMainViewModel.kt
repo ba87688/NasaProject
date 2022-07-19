@@ -27,17 +27,13 @@ class AstroidMainViewModel(
     private lateinit var s: AstroidApiModel
 
 
-
-
-
-
     val restaurants = repository.getRestaurants().asLiveData()
 
 
-    val videolist:LiveData<List<AstroidMade>>
-        get() = _astroidList
-    private val _astroidList = MutableLiveData<List<AstroidMade>>()
-
+//    val videolist:LiveData<List<AstroidMade>>
+//        get() = _astroidList
+//    private val _astroidList = MutableLiveData<List<AstroidMade>>()
+//
 
     init {
 
@@ -57,11 +53,7 @@ class AstroidMainViewModel(
     }
 
 
-    fun getLiveData(): LiveData<List<AstroidMade>> {
 
-        return videolist
-
-    }
 
     suspend fun insert(astroid: AstroidMade) {
         repository.insert(astroid)
@@ -89,32 +81,6 @@ class AstroidMainViewModel(
     }
 
     fun createList() {
-        viewModelScope.launch {
-            Log.i(ContentValues.TAG, "onCreateView: thread frag started")
-
-            Log.i("WTF viewmodel", "createList: WTF ")
-            withContext(Dispatchers.IO) {
-                val george = repository.getAstroid()
-                Log.i("WTF viewmodel", "createList: WTF ${george} ")
-
-                val data = parseData(george!!)
-
-
-                withContext(Dispatchers.Main) {
-
-                    _astroidList.value = data
-                    Log.i("WTF viewmodel", "createList: WTF ${_astroidList.value} ")
-                    Log.i("WTF viewmodel", "createList: WTF ${videolist.value} ")
-
-                }
-
-
-
-            }
-
-
-        }
-
 
     }
 

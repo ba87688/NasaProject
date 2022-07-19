@@ -82,7 +82,7 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
         binding.apply {
            
             v.restaurants.observe(lifecycleOwner!!){ it->
-                Log.i(TAG, "retard: ${it.data}")
+                Log.i(TAG, "Checking live data: ${it.data}")
                 adapter = AstroMadeAdapter(it.data!!,this@MainFragment)
                 recyclerview.adapter = adapter
             }
@@ -110,18 +110,18 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 //            val d = parseAstroid(s)
 //            Log.i("RETROLIST", "createList: $d")
 
-            var data = AstroidMadeDatabase.getInstance(this@MainFragment.requireContext())
-            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidMadeDatabase::class.java, "astroid_history").allowMainThreadQueries().build()
-
-
-
-            var liveDa = v.getLiveData()
-            liveDa.observe(viewLifecycleOwner, Observer { it ->
-                Log.i(TAG, "inside live data: $it")
-
-            })
-            Log.i(TAG, "database item: ${liveDa.value}")
-
+//            var data = AstroidMadeDatabase.getInstance(this@MainFragment.requireContext())
+//            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidMadeDatabase::class.java, "astroid_history").allowMainThreadQueries().build()
+//
+//
+//
+//            var liveDa = v.getLiveData()
+//            liveDa.observe(viewLifecycleOwner, Observer { it ->
+//                Log.i(TAG, "inside live data: $it")
+//
+//            })
+//            Log.i(TAG, "database item: ${liveDa.value}")
+//
 
 
 
