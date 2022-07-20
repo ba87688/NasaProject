@@ -8,11 +8,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
 
 
-    val api:AstroidApi by lazy {
+    val api1:AstroidApi by lazy {
         Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AstroidApi::class.java)
     }
+
 
 
 

@@ -4,6 +4,7 @@ import com.example.astroidnasa.models.Asteroid1
 import com.example.astroidnasa.retrofitmodels.AstroidApiModel
 import com.example.astroidnasa.retrofitmodels.NearEarthObjects
 import com.example.astroidnasa.retrofitmodels.X20150907
+import com.example.roomapp.images.ImageOfTheDay
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -43,6 +44,11 @@ interface AstroidApi {
 
         ): Response<AstroidApiModel>
 
+    @GET("/planetary/apod")
+
+    suspend fun getPictureOfTheDay(
+        @Query("api_key") autheader: String = "$API_KEY"
+    ):Response<ImageOfTheDay>
 
 //
 //

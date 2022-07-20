@@ -1,6 +1,5 @@
 package com.example.roomapp.repository
 
-import android.net.Network
 import androidx.lifecycle.LiveData
 import androidx.room.withTransaction
 import com.example.astroidnasa.network.RetrofitInstance
@@ -8,6 +7,7 @@ import com.example.astroidnasa.retrofitmodels.AstroidApiModel
 import com.example.roomapp.api.AstroidMade
 import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidMadeDatabase
+import com.example.roomapp.images.ImageOfTheDay
 import com.example.roomapp.util.networkBoundResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -16,7 +16,7 @@ import retrofit2.Response
 
 class AstroidRepository(private val database: AstroidMadeDatabase) {
 
-    val service = RetrofitInstance.api
+    val service = RetrofitInstance.api1
     val astroids: LiveData<List<AstroidMade>> = database.assDatabaseDao.getAllNights()
 
     fun getRestaurants() = networkBoundResource(
@@ -37,6 +37,10 @@ class AstroidRepository(private val database: AstroidMadeDatabase) {
             }
         }
     )
+
+
+
+
 
 
     suspend fun refreshAstroids() {
@@ -76,6 +80,9 @@ class AstroidRepository(private val database: AstroidMadeDatabase) {
 
     suspend fun get(key: Int): AstroidMade {
         return database.assDatabaseDao.get(key)
+    }
+    suspend fun getImage():Response<ImageOfTheDay>{
+        return service.getPictureOfTheDay()
     }
 
 

@@ -34,7 +34,9 @@ import com.example.roomapp.model.Ass
 import com.example.roomapp.repository.AstroidRepository
 import com.example.roomapp.viewModel.AstroidMainViewModel
 import com.example.roomapp.viewModel.AstroidMainViewModelFactory
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -43,7 +45,6 @@ import kotlin.math.log
 
 class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeAdapter.OnItemClickListener{
     private lateinit var binding: FragmentMainBinding
-    var r: List<X20150907>? =null
 
 
     override fun onCreateView(
@@ -53,8 +54,7 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
-        val url = "https://apod.nasa.gov/apod/image/2001/STSCI-H-p2006a-h-1024x614.jpg"
-        Glide.with(this@MainFragment).load(url).centerCrop().into(binding.imageOfTheDay)
+
 
 //       viewmodel reference application
         val application = requireNotNull(this.activity).application
@@ -77,21 +77,50 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 
 
         var v = ViewModelProvider(this).get(AstroidMainViewModel::class.java)
+        var url:String =""
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO){
+                url = v.getUrl()
+
+                withContext(Dispatchers.Main) {
+                    Log.i(TAG, "onCreateView: inside corotine $url")
+//                    Picasso.get()
+//                        .load(url)
+//                        .placeholder(R.drawable.ic_baseline_add_24)
+//                        .into(binding.imageOfTheDay)
+                }
+            }
+        }
+
+        v.url.observe(viewLifecycleOwner, Observer {it->
+                // if count time finished it set the value
+            Log.i(TAG, "onCreateView: $it")
+
+            Picasso.get()
+                        .load(it)
+                        .placeholder(R.drawable.ic_baseline_add_24)
+                        .into(binding.imageOfTheDay)
+            }
+        )
+
+
+//        Glide.with(this@MainFragment).load("https://apod.nasa.gov/apod/image/2207/JupiterRing_WebbSchmidt_1080.jpg").centerCrop().into(binding.imageOfTheDay)
+
+
 
         var adapter :AstroMadeAdapter
         binding.apply {
            
-            v.restaurants.observe(lifecycleOwner!!){ it->
-                Log.i(TAG, "Checking live data: ${it.data}")
-                adapter = AstroMadeAdapter(it.data!!,this@MainFragment)
+            v.restaurants.observe(lifecycleOwner!!){ result->
+                Log.i(TAG, "Checking live data: ${result.data}")
+
+                adapter = AstroMadeAdapter(result.data!!,this@MainFragment)
                 recyclerview.adapter = adapter
             }
         }
 
         lifecycleScope.launch {
 
-//            Log.i(TAG, "onCreateView: main frag started ${v.videolist.value}")
-//
 //            val d = v.getAstroid("2015-09-07","2015-09-08")
 //            val parsedData = v.parseData(d!!)
 //            val adapter = AstroMadeAdapter(parsedData,this@MainFragment)
@@ -101,14 +130,7 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 //            }
 
 
-//            v.initializeTonight()
 
-
-
-//            val re = RetrofitInstance.api.getAstroids()
-//            val s = re.body()!!
-//            val d = parseAstroid(s)
-//            Log.i("RETROLIST", "createList: $d")
 
 //            var data = AstroidMadeDatabase.getInstance(this@MainFragment.requireContext())
 //            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidMadeDatabase::class.java, "astroid_history").allowMainThreadQueries().build()
@@ -135,8 +157,8 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
     }
 
     override fun onItemClick(position: Int) {
-        Log.i(ContentValues.TAG, "onItemClick: $position")
-        Log.i(ContentValues.TAG, "onItemClick: ${r?.get(position)}")
+//        Log.i(ContentValues.TAG, "onItemClick: $position")
+//        Log.i(ContentValues.TAG, "onItemClick: ${r?.get(position)}")
         view?.findNavController()?.navigate(R.id.action_mainFragment_to_detailFragment)
 
 

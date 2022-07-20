@@ -27,10 +27,23 @@ interface AstroidMadeDao {
     @Query("SELECT * FROM astroid_table ORDER BY id DESC")
     fun getRestaurants(): Flow<List<AstroidMade>>
 
+    
+
+
     @Query("SELECT * FROM astroid_table ORDER BY id DESC")
     fun getAllListNights(): List<AstroidMade>
 
     @Query("DELETE FROM astroid_table")
     suspend fun deleteAllAstroids()
+
+
+    //image class
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertImage(astroid: AstroidMade)
+
+    @Query("SELECT * FROM astroid_table ORDER BY id DESC")
+    fun getImagess(): Flow<List<AstroidMade>>
+
 
 }

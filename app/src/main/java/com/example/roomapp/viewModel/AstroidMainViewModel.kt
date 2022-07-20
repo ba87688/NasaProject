@@ -1,22 +1,14 @@
 package com.example.roomapp.viewModel
 
 import android.app.Application
-import android.content.ContentValues
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.astroidnasa.fragments.MainFragment
 import com.example.astroidnasa.retrofitmodels.AstroidApiModel
-import com.example.roomapp.adapter.AstroMadeAdapter
 import com.example.roomapp.api.AstroidMade
-import com.example.roomapp.api.Constants
 import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidMadeDatabase
 import com.example.roomapp.repository.AstroidRepository
 import kotlinx.coroutines.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 class AstroidMainViewModel(
     val database: AstroidMadeDatabase, application: Application
@@ -29,6 +21,11 @@ class AstroidMainViewModel(
 
     val restaurants = repository.getRestaurants().asLiveData()
 
+
+    val url: LiveData<String>
+        get() = _url
+
+    private val _url = MutableLiveData<String>()
 
 //    val videolist:LiveData<List<AstroidMade>>
 //        get() = _astroidList
@@ -47,12 +44,10 @@ class AstroidMainViewModel(
 
     }
 
-    fun createRestaurants(){
+    fun createRestaurants() {
         val restaurants = repository.getRestaurants().asLiveData()
 
     }
-
-
 
 
     suspend fun insert(astroid: AstroidMade) {
@@ -67,20 +62,52 @@ class AstroidMainViewModel(
         repository.insertList(astroidList)
     }
 
-    fun parseData(d:AstroidApiModel):List<AstroidMade>{
+    fun parseData(d: AstroidApiModel): List<AstroidMade> {
         return parseAstroid(d)
     }
 
 
     //api call
-    suspend fun getAstroid( a:String,b: String): AstroidApiModel? {
-        val re = repository.getAstroid(a,b)
+    suspend fun getAstroid(a: String, b: String): AstroidApiModel? {
+        val re = repository.getAstroid(a, b)
 
         return re
 
     }
 
     fun createList() {
+    }
+
+    fun getUrl(): String {
+        var url: String = ""
+
+        viewModelScope.launch {
+
+            val imageObject = repository.getImage()
+            if (imageObject.isSuccessful) {
+                if (imageObject.body()?.media_type == "image") {
+                    url = imageObject.body()?.url!!
+
+                } else {
+                    url = "https://apod.nasa.gov/apod/image/2001/STSCI-H-p2006a-h-1024x614.jpg"
+                }
+
+
+            } else {
+                Log.i("There was an error", "in the code")
+
+            }
+            Log.i("IS BODY full", "createList: ${imageObject.body()?.date} ")
+            Log.i("IS BODY full", "createList: $url ")
+            withContext(Dispatchers.Main) {
+                _url.value = url
+
+            }
+
+        }
+
+        return url
+
 
     }
 
