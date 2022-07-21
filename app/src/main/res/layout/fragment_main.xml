@@ -41,10 +41,10 @@
                 android:layout_alignRight="@id/image_of_the_day"
                 android:layout_alignBottom="@id/image_of_the_day"
                 android:layout_margin="1dp"
-                android:textSize="28sp"
+                android:textSize="20sp"
                 android:gravity="center|bottom"
-                android:text="Hello"
-                android:textColor="@color/colorPrimary" />
+                tools:text="Hello"
+                android:textColor="@color/default_text_color" />
 
         </RelativeLayout>
 

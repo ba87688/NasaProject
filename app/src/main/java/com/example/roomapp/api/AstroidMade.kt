@@ -10,6 +10,8 @@ import androidx.room.PrimaryKey
 data class AstroidMade(
     @PrimaryKey()
     val id: Int,
+    @ColumnInfo(name = "name_of_thing")
+    val name: String,
     @ColumnInfo(name = "name_of_ass")
     val absoluteMagnitude: Double,
     @ColumnInfo(name = "estimate")

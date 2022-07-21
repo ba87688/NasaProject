@@ -8,5 +8,6 @@ data class X20150907(
     val close_approach_data: List<CloseApproachData>, //tea
     val estimated_diameter: EstimatedDiameter, //yea
     val id: String,     //yea
+    val name: String,     //yea
     val is_potentially_hazardous_asteroid: Boolean //yea
 )

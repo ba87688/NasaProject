@@ -35,8 +35,14 @@ class AstroMadeAdapter (val list:List<AstroidMade>, private val listener: AstroM
 
     override fun onBindViewHolder(holder: AstroMadeViewHolder2, position: Int) {
         holder.itemView.apply {
-            astroid_name.text =list[position].astronomical.toString()
-            astroid_date.text =list[position].id.toString()
+            astroid_name.text =list[position].id.toString()
+            astroid_date.text =list[position].name
+            if (list[position].isPotentiallyHazardous){
+                im_smile_or_nosmile.setImageResource(R.drawable.ic_status_potentially_hazardous)
+            }else{
+                im_smile_or_nosmile.setImageResource(R.drawable.ic_status_normal)
+
+            }
         }
     }
 
