@@ -34,6 +34,10 @@ abstract class AstroidMadeDatabase : RoomDatabase(){
 
             }
         }
+
+        fun getDatabase(context: Context):AstroidMadeDatabase{
+            return getInstance(context)
+        }
     }
 
 }

@@ -43,7 +43,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.log
 
-class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeAdapter.OnItemClickListener{
+class MainFragment : Fragment(), AstroidAdapter2.OnItemClickListener,
+    AstroMadeAdapter.OnItemClickListener {
     private lateinit var binding: FragmentMainBinding
 
 
@@ -55,66 +56,57 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
 
-
 //       viewmodel reference application
         val application = requireNotNull(this.activity).application
         //reference datasource
         val dataSource = AstroidMadeDatabase.getInstance(application)
         //create viewmodel factory that takes in application and datasoruce
-        val viewModelFactory = AstroidMainViewModelFactory(dataSource,application)
+        val viewModelFactory = AstroidMainViewModelFactory(dataSource, application)
 
         //now that we have a factory, we can ask provider
 
-        val astroidTrackerViewModel = ViewModelProvider(this,viewModelFactory).get(AstroidMainViewModel::class.java)
+        val astroidTrackerViewModel =
+            ViewModelProvider(this, viewModelFactory).get(AstroidMainViewModel::class.java)
 
         binding.setLifecycleOwner(this)
 
         binding.astroidMainViewModel = astroidTrackerViewModel
 
 
-
-
-
-
         var v = ViewModelProvider(this).get(AstroidMainViewModel::class.java)
-        var url:String =""
+        var url: String = ""
         lifecycleScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 url = v.getUrl()
-
-                withContext(Dispatchers.Main) {
-                    Log.i(TAG, "onCreateView: inside corotine $url")
-//                    Picasso.get()
-//                        .load(url)
-//                        .placeholder(R.drawable.ic_baseline_add_24)
-//                        .into(binding.imageOfTheDay)
-                }
             }
         }
 
-        v.url.observe(viewLifecycleOwner, Observer {it->
-                // if count time finished it set the value
+        v.url.observe(viewLifecycleOwner, Observer { it ->
+            // if count time finished it set the value
             Log.i(TAG, "onCreateView: $it")
 
+
+
+//            Glide.with(this@MainFragment).load(it).centerCrop().into(binding.imageOfTheDay)
+
             Picasso.get()
-                        .load(it)
-                        .placeholder(R.drawable.ic_baseline_add_24)
-                        .into(binding.imageOfTheDay)
-            }
+                .load(it)
+                .placeholder(R.drawable.ic_baseline_add_24)
+                .into(binding.imageOfTheDay)
+
+        }
         )
 
 
-//        Glide.with(this@MainFragment).load("https://apod.nasa.gov/apod/image/2207/JupiterRing_WebbSchmidt_1080.jpg").centerCrop().into(binding.imageOfTheDay)
 
 
-
-        var adapter :AstroMadeAdapter
+        var adapter: AstroMadeAdapter
         binding.apply {
-           
-            v.restaurants.observe(lifecycleOwner!!){ result->
+
+            v.restaurants.observe(lifecycleOwner!!) { result ->
                 Log.i(TAG, "Checking live data: ${result.data}")
 
-                adapter = AstroMadeAdapter(result.data!!,this@MainFragment)
+                adapter = AstroMadeAdapter(result.data!!, this@MainFragment)
                 recyclerview.adapter = adapter
             }
         }
@@ -128,8 +120,6 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 //            withContext(Dispatchers.Main){
 //                binding.recyclerview.adapter = adapter
 //            }
-
-
 
 
 //            var data = AstroidMadeDatabase.getInstance(this@MainFragment.requireContext())
@@ -146,7 +136,6 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 //
 
 
-
         }
 
 
@@ -160,8 +149,6 @@ class MainFragment : Fragment() , AstroidAdapter2.OnItemClickListener,AstroMadeA
 //        Log.i(ContentValues.TAG, "onItemClick: $position")
 //        Log.i(ContentValues.TAG, "onItemClick: ${r?.get(position)}")
         view?.findNavController()?.navigate(R.id.action_mainFragment_to_detailFragment)
-
-
 
 
     }
