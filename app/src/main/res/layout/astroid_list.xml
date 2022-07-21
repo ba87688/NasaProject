@@ -13,8 +13,8 @@
         android:layout_height="100dp">
 
         <TextView
-            android:id="@+id/astroid_name"
-            android:layout_width="60dp"
+            android:id="@+id/tv_close_approach_date"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginBottom="16dp"
             android:textColor="@color/default_text_color"

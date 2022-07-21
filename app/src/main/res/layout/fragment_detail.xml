@@ -2,20 +2,156 @@
 
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <data>
+
+        <variable
+            name="astroidMainViewModel"
+            type="com.example.roomapp.viewModel.AstroidMainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.DetailFragment">
+        android:background="@color/colorPrimary"
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:id="@+id/saftey"
+        tools:context=".fragments.MainFragment">
+
+        <ImageView
+            android:id="@+id/iv_hazordous_or_no"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="HELLO THERE" />
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/tv_close_approach_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+
+            android:text="TextView"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="@+id/astroid_date"
+            app:layout_constraintTop_toBottomOf="@+id/astroid_date" />
+
+        <TextView
+            android:id="@+id/astroid_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/close_approach_date"
+            android:textColor="@color/default_text_color"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.119"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_hazordous_or_no" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+
+            android:text="@string/absolute_magnitude"
+            android:textColor="@color/default_text_color"
+
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/astroid_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_close_approach_date" />
+
+        <TextView
+            android:id="@+id/tv_absolute_magnitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+
+            android:text="TextView"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="@+id/astroid_date"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/estimated_diameter"
+            android:textColor="@color/default_text_color"
+
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/astroid_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_absolute_magnitude" />
+
+        <TextView
+            android:id="@+id/rv_estimated_diameter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+
+            android:text="TextView"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="@+id/astroid_date"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/relative_velocity"
+
+            android:textColor="@color/default_text_color"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/astroid_date"
+            app:layout_constraintTop_toBottomOf="@+id/rv_estimated_diameter" />
+
+        <TextView
+            android:id="@+id/tv_relative_velocity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+
+            android:text="TextView"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="@+id/astroid_date"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Distance From Earth"
+            android:textColor="@color/default_text_color"
+
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/astroid_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_relative_velocity" />
+
+        <TextView
+            android:id="@+id/tv_distance_from_earth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+
+            tools:text="TextView"
+            android:textColor="@color/default_text_color"
+            app:layout_constraintStart_toStartOf="@+id/astroid_date"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -27,6 +27,7 @@ fun parseAstroid(a: AstroidApiModel): MutableList<AstroidMade> {
     for (i in a.near_earth_objects.`2015-09-07`) {
         val id = i.id.toInt()
         val name = i.name.toString()
+        val closeApproachDate = i.close_approach_data.get(0).close_approach_date.toString()
         val absoluteMagnitude = i.absolute_magnitude_h
         val estimatedDiameter: Double = i.estimated_diameter.feet.estimated_diameter_max
         val isPotentiallyHazardous: Boolean = i.is_potentially_hazardous_asteroid
@@ -39,6 +40,7 @@ fun parseAstroid(a: AstroidApiModel): MutableList<AstroidMade> {
         val astr = AstroidMade(
             id,
             name,
+            closeApproachDate,
             absoluteMagnitude,
             estimatedDiameter,
             isPotentiallyHazardous,

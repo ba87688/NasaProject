@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Astroid Radar</string>
+    <string name="close_approach_date">Close Approach Date</string>
+    <string name="absolute_magnitude">Absolute Magnitude</string>
+    <string name="estimated_diameter">Estimated Diameter</string>
+    <string name="relative_velocity">Relative Velocity</string>
 </resources>

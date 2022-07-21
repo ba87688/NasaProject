@@ -23,7 +23,19 @@ class DetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail,container,false)
 
 
-        binding.saftey.text = args.re.name
+        val astroid = args.re
+
+        if (args.re.isPotentiallyHazardous){
+            binding.ivHazordousOrNo.setImageResource(R.drawable.hazardous)
+        }else{
+            binding.ivHazordousOrNo.setImageResource(R.drawable.not_hazardous)
+
+        }
+        binding.tvCloseApproachDate.text = args.re.closeApproachDate.toString()
+        binding.tvAbsoluteMagnitude.text = args.re.absoluteMagnitude.toString()
+        binding.rvEstimatedDiameter.text = args.re.estimatedDiameter.toString()
+        binding.tvRelativeVelocity.text = args.re.kilometerPerSecond.toString()
+        binding.tvDistanceFromEarth.text = args.re.name.toString()
 
 
 

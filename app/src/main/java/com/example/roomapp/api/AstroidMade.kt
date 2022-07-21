@@ -14,6 +14,8 @@ data class AstroidMade(
     val id: Int,
     @ColumnInfo(name = "name_of_thing")
     val name: String,
+    @ColumnInfo(name = "close_approach_date")
+    val closeApproachDate: String,
     @ColumnInfo(name = "name_of_ass")
     val absoluteMagnitude: Double,
     @ColumnInfo(name = "estimate")
