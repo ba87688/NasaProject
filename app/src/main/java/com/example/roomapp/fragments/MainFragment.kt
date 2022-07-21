@@ -45,6 +45,8 @@ import kotlin.math.log
 
 class MainFragment : Fragment(), AstroidAdapter2.OnItemClickListener,
     AstroMadeAdapter.OnItemClickListener {
+
+    var list:List<AstroidMade> = mutableListOf()
     private lateinit var binding: FragmentMainBinding
 
 
@@ -83,16 +85,18 @@ class MainFragment : Fragment(), AstroidAdapter2.OnItemClickListener,
 
         v.url.observe(viewLifecycleOwner, Observer { it ->
             // if count time finished it set the value
-            Log.i(TAG, "onCreateView: $it")
+            Log.i(TAG, "obs class url: $it")
 
 
 //            Glide.with(this@MainFragment).load(it).centerCrop().into(binding.imageOfTheDay)
 
+            if(it==""){}
+            else{
             Picasso.get()
                 .load(it)
                 .fit()
                 .placeholder(R.drawable.ic_baseline_add_24)
-                .into(binding.imageOfTheDay)
+                .into(binding.imageOfTheDay)}
 
         }
         )
@@ -120,6 +124,7 @@ class MainFragment : Fragment(), AstroidAdapter2.OnItemClickListener,
 
             v.restaurants.observe(lifecycleOwner!!) { result ->
                 Log.i(TAG, "Checking live data: ${result.data}")
+                list = result.data!!
 
                 adapter = AstroMadeAdapter(result.data!!, this@MainFragment)
                 recyclerview.adapter = adapter
@@ -163,7 +168,14 @@ class MainFragment : Fragment(), AstroidAdapter2.OnItemClickListener,
     override fun onItemClick(position: Int) {
 //        Log.i(ContentValues.TAG, "onItemClick: $position")
 //        Log.i(ContentValues.TAG, "onItemClick: ${r?.get(position)}")
-        view?.findNavController()?.navigate(R.id.action_mainFragment_to_detailFragment)
+
+        var str = "edit the string $position"
+
+        var astrpod = list.get(position)
+
+        val action = MainFragmentDirections.actionMainFragmentToDetailFragment(astrpod)
+//        view?.findNavController()?.navigate(R.id.action_mainFragment_to_detailFragment)
+        view?.findNavController()?.navigate(action)
 
 
     }

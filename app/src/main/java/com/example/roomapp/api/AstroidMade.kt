@@ -1,11 +1,13 @@
 package com.example.roomapp.api
 
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 @Entity(tableName = "astroid_table")
 data class AstroidMade(
     @PrimaryKey()
@@ -22,7 +24,7 @@ data class AstroidMade(
     val kilometerPerSecond: Double,
     @ColumnInfo(name = "astonomical")
     val astronomical: Double
-) {
+): Parcelable {
 //    @PrimaryKey(autoGenerate = true)
 //    var idd: Int=0
 }

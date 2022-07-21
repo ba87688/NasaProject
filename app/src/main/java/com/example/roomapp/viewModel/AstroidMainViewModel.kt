@@ -103,11 +103,8 @@ class AstroidMainViewModel(
                 } else {
                     url = "https://apod.nasa.gov/apod/image/2001/STSCI-H-p2006a-h-1024x614.jpg"
                 }
-
-
             } else {
                 Log.i("There was an error", "in the code")
-
             }
             Log.i("IS BODY full", "createList: ${imageObject.body()?.date} ")
             Log.i("IS BODY full", "createList: $url ")
@@ -126,6 +123,10 @@ class AstroidMainViewModel(
     }
 
 
+    fun getList(int: Int){
+
+
+    }
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()

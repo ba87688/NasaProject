@@ -18,7 +18,6 @@
         android:label="DetailFragment" >
         <argument
             android:name="re"
-            app:argType="string"
-            android:defaultValue="no" />
+            app:argType="com.example.roomapp.api.AstroidMade" />
     </fragment>
 </navigation>
