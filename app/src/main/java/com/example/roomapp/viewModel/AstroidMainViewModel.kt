@@ -24,8 +24,15 @@ class AstroidMainViewModel(
 
     val url: LiveData<String>
         get() = _url
-
     private val _url = MutableLiveData<String>()
+
+    val explination: LiveData<String>
+        get() = _explination
+    private val _explination = MutableLiveData<String>()
+
+    val title: LiveData<String>
+        get() = _title
+    private val _title = MutableLiveData<String>()
 
 //    val videolist:LiveData<List<AstroidMade>>
 //        get() = _astroidList
@@ -80,11 +87,16 @@ class AstroidMainViewModel(
 
     fun getUrl(): String {
         var url: String = ""
+        var explanation: String = ""
+        var title: String  = ""
 
         viewModelScope.launch {
 
             val imageObject = repository.getImage()
+
             if (imageObject.isSuccessful) {
+                explanation = imageObject.body()?.explanation!!
+                title = imageObject.body()?.title!!
                 if (imageObject.body()?.media_type == "image") {
                     url = imageObject.body()?.url!!
 
@@ -101,6 +113,8 @@ class AstroidMainViewModel(
             Log.i("IS BODY full", "createList: $url ")
             withContext(Dispatchers.Main) {
                 _url.value = url
+                _explination.value = explanation
+                _title.value = title
 
             }
 

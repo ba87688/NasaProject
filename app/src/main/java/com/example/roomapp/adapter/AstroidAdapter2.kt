@@ -39,7 +39,7 @@ class AstroidAdapter2 ( val list:List<X20150907>,
 
     override fun onBindViewHolder(holder: AstroidAdapter2.AstroidViewHolder2, position: Int) {
         holder.itemView.apply {
-            astroid_name.text =list[position].absolute_magnitude_h.toString()
+            astroid_date.text =list[position].absolute_magnitude_h.toString()
         }
     }
 

@@ -25,7 +25,7 @@ class AstroidAdapter ( val list:List<Astroid>):RecyclerView.Adapter<AstroidAdapt
     override fun onBindViewHolder(holder: AstroidViewHolder, position: Int) {
 
         holder.itemView.apply {
-            astroid_name.text =list[position].name
+            astroid_date.text =list[position].name
         }
 
 

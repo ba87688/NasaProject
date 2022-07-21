@@ -86,18 +86,33 @@ class MainFragment : Fragment(), AstroidAdapter2.OnItemClickListener,
             Log.i(TAG, "onCreateView: $it")
 
 
-
 //            Glide.with(this@MainFragment).load(it).centerCrop().into(binding.imageOfTheDay)
 
             Picasso.get()
                 .load(it)
+                .fit()
                 .placeholder(R.drawable.ic_baseline_add_24)
                 .into(binding.imageOfTheDay)
 
         }
         )
 
+        v.title.observe(viewLifecycleOwner, Observer { it ->
+            Log.i(TAG, "title: $it")
 
+            binding.myImageViewText.text = it.toString()
+            binding.imageOfTheDay.contentDescription = it.toString()
+            }
+
+
+        )
+        v.explination.observe(viewLifecycleOwner, Observer { it ->
+            Log.i(TAG, "explain: $it")
+
+
+
+        }
+        )
 
 
         var adapter: AstroMadeAdapter

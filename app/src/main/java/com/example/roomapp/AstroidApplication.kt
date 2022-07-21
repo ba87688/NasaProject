@@ -21,7 +21,9 @@ class AstroidApplication:Application() {
             setupRecurringWork()
         }
     }
+
     private fun setupRecurringWork(){
+
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.UNMETERED)
             .setRequiredNetworkType(NetworkType.CONNECTED)

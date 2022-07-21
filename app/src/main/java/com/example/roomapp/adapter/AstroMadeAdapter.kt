@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.astroidnasa.retrofitmodels.X20150907
 import com.example.roomapp.R
 import com.example.roomapp.api.AstroidMade
 import kotlinx.android.synthetic.main.astroid_list.view.*
@@ -36,7 +35,8 @@ class AstroMadeAdapter (val list:List<AstroidMade>, private val listener: AstroM
 
     override fun onBindViewHolder(holder: AstroMadeViewHolder2, position: Int) {
         holder.itemView.apply {
-            astroid_name.text =list[position].id.toString()
+            astroid_name.text =list[position].astronomical.toString()
+            astroid_date.text =list[position].id.toString()
         }
     }
 
