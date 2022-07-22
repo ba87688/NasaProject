@@ -29,14 +29,20 @@ class AstroidsRepository(private val database: AstroidsDatabase) {
 //
     fun getRestaurants() = networkBoundResource2(
         query = {
+
             database.assDatabaseDao.getRestaurants()
         },
         fetch = {
-            delay(2000)
-            val data = service.getAstroids3()
-            val you= Gson().toJson(data)
-            val you1 = JSONObject(you)
-            val pr = parseAsteroidsJsonResult(you1)
+            var pr : ArrayList<Astroid> = arrayListOf()
+            withContext(Dispatchers.IO) {
+                val data = service.getAstroids3()
+                val you = Gson().toJson(data)
+                val you1 = JSONObject(you)
+                val pr1 = parseAsteroidsJsonResult(you1)
+                withContext(Dispatchers.IO){
+                    pr= pr1
+                }
+            }
             pr
         },
         saveFetchResult = { astroid->
@@ -48,6 +54,35 @@ class AstroidsRepository(private val database: AstroidsDatabase) {
         }
     )
 //
+
+    fun getRestaurants2() = networkBoundResource2(
+        query = {
+
+
+
+            database.assDatabaseDao.getRestaurants2()
+        },
+        fetch = {
+            var image: ImageOfTheDay? = null
+            withContext(Dispatchers.IO) {
+
+                val imageObject = getImage().body()
+
+                withContext(Dispatchers.IO){
+                    image= imageObject
+                }
+            }
+            image
+
+        },
+        saveFetchResult = { imageObject->
+
+            database.withTransaction {
+                database.assDatabaseDao.deleteImages()
+                database.assDatabaseDao.insertImage(imageObject!!)
+            }
+        }
+    )
 
 
 

@@ -23,6 +23,7 @@ class AstroidsViewModel(
 
 
     val restaurants = repository.getRestaurants().asLiveData()
+    val dailyImage = repository.getRestaurants2().asLiveData()
 
 
     val url: LiveData<String>
@@ -47,7 +48,7 @@ class AstroidsViewModel(
 
 //        repository = AstroidRepository(database)
         createRestaurants()
-        createList()
+//        createList()
 
         Log.i("Started", "viewmodel started: ")
 
@@ -72,58 +73,47 @@ class AstroidsViewModel(
         repository.insertList(astroidList)
     }
 
-//    fun parseData(d: AstroidApiModel): List<Astroid> {
-//        return parseAstroid(d)
+
+
+//    fun createList() {
 //    }
-
-
-    //api call
-//    suspend fun getAstroid(a: String, b: String): AstroidApiModel? {
-//        val re = repository.getAstroid(a, b)
 //
-//        return re
+//    fun getUrl(): String {
+//        var url: String = ""
+//        var explanation: String = ""
+//        var title: String  = ""
+//
+//        viewModelScope.launch {
+//
+//            val imageObject = repository.getImage()
+//
+//            if (imageObject.isSuccessful) {
+//                explanation = imageObject.body()?.explanation!!
+//                title = imageObject.body()?.title!!
+//                if (imageObject.body()?.media_type == "image") {
+//                    url = imageObject.body()?.url!!
+//
+//                } else {
+//                    url = "https://apod.nasa.gov/apod/image/2001/STSCI-H-p2006a-h-1024x614.jpg"
+//                }
+//            } else {
+//                Log.i("There was an error", "in the code")
+//            }
+//            Log.i("IS BODY full", "createList: ${imageObject.body()?.date} ")
+//            Log.i("IS BODY full", "createList: $url ")
+//            withContext(Dispatchers.Main) {
+//                _url.value = url
+//                _explination.value = explanation
+//                _title.value = title
+//
+//            }
+//
+//        }
+//
+//        return url
+//
 //
 //    }
-
-    fun createList() {
-    }
-
-    fun getUrl(): String {
-        var url: String = ""
-        var explanation: String = ""
-        var title: String  = ""
-
-        viewModelScope.launch {
-
-            val imageObject = repository.getImage()
-
-            if (imageObject.isSuccessful) {
-                explanation = imageObject.body()?.explanation!!
-                title = imageObject.body()?.title!!
-                if (imageObject.body()?.media_type == "image") {
-                    url = imageObject.body()?.url!!
-
-                } else {
-                    url = "https://apod.nasa.gov/apod/image/2001/STSCI-H-p2006a-h-1024x614.jpg"
-                }
-            } else {
-                Log.i("There was an error", "in the code")
-            }
-            Log.i("IS BODY full", "createList: ${imageObject.body()?.date} ")
-            Log.i("IS BODY full", "createList: $url ")
-            withContext(Dispatchers.Main) {
-                _url.value = url
-                _explination.value = explanation
-                _title.value = title
-
-            }
-
-        }
-
-        return url
-
-
-    }
 
 
     fun getList(int: Int){

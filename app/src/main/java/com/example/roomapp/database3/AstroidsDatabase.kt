@@ -8,9 +8,10 @@ import androidx.room.RoomDatabase
 import com.example.roomapp.api.Astroid
 import com.example.roomapp.database2.AstroidMadeDao
 import com.example.roomapp.database3.AstroidsDao
+import com.example.roomapp.images.ImageOfTheDay
 
 
-@Database(entities = [Astroid::class], version = 1, exportSchema = false)
+@Database(entities = [Astroid::class, ImageOfTheDay::class], version = 1, exportSchema = false)
 abstract class AstroidsDatabase : RoomDatabase(){
 
     abstract val assDatabaseDao: AstroidsDao

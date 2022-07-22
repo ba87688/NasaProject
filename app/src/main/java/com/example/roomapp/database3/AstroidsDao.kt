@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.roomapp.api.Astroid
 import com.example.roomapp.api.AstroidMade
+import com.example.roomapp.images.ImageOfTheDay
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -40,11 +41,24 @@ interface AstroidsDao {
 
     //image class
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertImage(astroid: Astroid)
 
-    @Query("SELECT * FROM astroids_table ORDER BY id DESC")
-    fun getImagess(): Flow<List<Astroid>>
+
+
+
+    //image of the day data
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertImage(image: ImageOfTheDay)
+
+    @Query("SELECT * from image_of_the_day_table WHERE url=:key")
+    fun getImage(key:Int) : ImageOfTheDay
+
+    @Query("SELECT * FROM image_of_the_day_table")
+    fun getRestaurants2(): Flow<ImageOfTheDay>
+
+    @Query("DELETE FROM image_of_the_day_table")
+    suspend fun deleteImages()
+
 
 
 }

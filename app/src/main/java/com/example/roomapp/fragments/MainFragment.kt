@@ -93,44 +93,36 @@ class MainFragment : Fragment(), AdapterClassic.OnItemClickListener,
         var url: String = ""
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
-                url = v.getUrl()
+//                url = v.getUrl()
             }
         }
 
-        v.url.observe(viewLifecycleOwner, Observer { it ->
-            // if count time finished it set the value
-            Log.i(TAG, "obs class url: $it")
+//        v.url.observe(viewLifecycleOwner, Observer { it ->
+//            // if count time finished it set the value
+//            Log.i(TAG, "obs class url: $it")
+//
+//            if(it==""){}
+//            else{
+//            Picasso.get()
+//                .load(it)
+//                .fit()
+//                .placeholder(R.drawable.ic_baseline_add_24)
+//                .into(binding.imageOfTheDay)
+//            }
+//        })
 
-
-//            Glide.with(this@MainFragment).load(it).centerCrop().into(binding.imageOfTheDay)
-
-            if(it==""){}
-            else{
-            Picasso.get()
-                .load(it)
-                .fit()
-                .placeholder(R.drawable.ic_baseline_add_24)
-                .into(binding.imageOfTheDay)}
-
-        }
-        )
-
-        v.title.observe(viewLifecycleOwner, Observer { it ->
-            Log.i(TAG, "title: $it")
-
-            binding.myImageViewText.text = it.toString()
-            binding.imageOfTheDay.contentDescription = it.toString()
-            }
-
-
-        )
-        v.explination.observe(viewLifecycleOwner, Observer { it ->
-            Log.i(TAG, "explain: $it")
-
-
-
-        }
-        )
+//        v.title.observe(viewLifecycleOwner, Observer { it ->
+//            Log.i(TAG, "title: $it")
+//
+//            binding.myImageViewText.text = it.toString()
+//            binding.imageOfTheDay.contentDescription = it.toString()
+//            })
+//        v.explination.observe(viewLifecycleOwner, Observer { it ->
+//            Log.i(TAG, "explain: $it")
+//
+//
+//
+//        })
 
 
         var adapter: AdapterClassic
@@ -156,7 +148,25 @@ class MainFragment : Fragment(), AdapterClassic.OnItemClickListener,
             }
 
 
-        }
+            v.dailyImage.observe(lifecycleOwner!!) { result ->
+                val image = result.data?.url
+                val title = result.data?.title
+                if (image==""){
+
+                }
+                else{
+                    Picasso.get()
+                        .load(image)
+                        .fit()
+                        .placeholder(R.drawable.ic_baseline_add_24)
+                        .into(imageOfTheDay)
+
+                }
+                myImageViewText.text = title.toString()
+                imageOfTheDay.contentDescription = title.toString()
+            }
+
+            }
 
 
 
