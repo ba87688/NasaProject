@@ -5,6 +5,7 @@ import com.example.astroidnasa.retrofitmodels.AstroidApiModel
 import com.example.astroidnasa.retrofitmodels.NearEarthObjects
 import com.example.astroidnasa.retrofitmodels.X20150907
 import com.example.roomapp.images.ImageOfTheDay
+import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -43,6 +44,19 @@ interface AstroidApi {
 
 
         ): Response<AstroidApiModel>
+
+
+
+    @GET("/neo/rest/v1/feed")
+    suspend fun getAstroids3(
+        @Query("start_date") searchTerm: String = "2015-09-07",
+        @Query("end_date") searchTerm2: String = "2015-09-08",
+        @Query("api_key") autheader: String = "$API_KEY"
+
+
+    ): Object
+
+
 
     @GET("/planetary/apod")
 

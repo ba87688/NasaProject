@@ -26,6 +26,7 @@ import com.example.roomapp.R
 import com.example.roomapp.adapter.AstroMadeAdapter
 import com.example.roomapp.api.AstroidMade
 import com.example.roomapp.api.Constants
+import com.example.roomapp.api.parseAsteroidsJsonResult
 import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidMadeDatabase
 import com.example.roomapp.database.AstroidRoomDatabase
@@ -34,11 +35,14 @@ import com.example.roomapp.model.Ass
 import com.example.roomapp.repository.AstroidRepository
 import com.example.roomapp.viewModel.AstroidMainViewModel
 import com.example.roomapp.viewModel.AstroidMainViewModelFactory
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.log
@@ -131,32 +135,7 @@ class MainFragment : Fragment(), AstroidAdapter2.OnItemClickListener,
             }
         }
 
-        lifecycleScope.launch {
 
-//            val d = v.getAstroid("2015-09-07","2015-09-08")
-//            val parsedData = v.parseData(d!!)
-//            val adapter = AstroMadeAdapter(parsedData,this@MainFragment)
-//
-//            withContext(Dispatchers.Main){
-//                binding.recyclerview.adapter = adapter
-//            }
-
-
-//            var data = AstroidMadeDatabase.getInstance(this@MainFragment.requireContext())
-//            data =  Room.databaseBuilder(this@MainFragment.requireContext(), AstroidMadeDatabase::class.java, "astroid_history").allowMainThreadQueries().build()
-//
-//
-//
-//            var liveDa = v.getLiveData()
-//            liveDa.observe(viewLifecycleOwner, Observer { it ->
-//                Log.i(TAG, "inside live data: $it")
-//
-//            })
-//            Log.i(TAG, "database item: ${liveDa.value}")
-//
-
-
-        }
 
 
 

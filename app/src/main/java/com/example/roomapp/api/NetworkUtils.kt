@@ -62,6 +62,7 @@ fun parseAstroid(a: AstroidApiModel): MutableList<AstroidMade> {
 
 fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
+    Log.i(TAG, "onCreateView1 inside method: ${nearEarthObjectsJson}")
 
     val asteroidList = ArrayList<Asteroid>()
 
@@ -69,6 +70,7 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
     for (formattedDate in nextSevenDaysFormattedDates) {
         if (nearEarthObjectsJson.has(formattedDate)) {
             val dateAsteroidJsonArray = nearEarthObjectsJson.getJSONArray(formattedDate)
+            Log.i(TAG, "onCreateView1 inside method: ${dateAsteroidJsonArray}")
 
             for (i in 0 until dateAsteroidJsonArray.length()) {
                 val asteroidJson = dateAsteroidJsonArray.getJSONObject(i)
@@ -92,6 +94,8 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
                     estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous
                 )
                 asteroidList.add(asteroid)
+                Log.i(TAG, "onCreateView1 inside list: ${asteroidList}")
+
             }
         }
     }
