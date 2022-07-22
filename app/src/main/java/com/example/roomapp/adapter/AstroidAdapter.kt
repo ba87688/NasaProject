@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
-import com.example.roomapp.model.Astroid
+import com.example.roomapp.api.Astroid
 import kotlinx.android.synthetic.main.astroid_list.view.*
 
 class AstroidAdapter ( val list:List<Astroid>):RecyclerView.Adapter<AstroidAdapter.AstroidViewHolder>() {
@@ -25,7 +25,6 @@ class AstroidAdapter ( val list:List<Astroid>):RecyclerView.Adapter<AstroidAdapt
     override fun onBindViewHolder(holder: AstroidViewHolder, position: Int) {
 
         holder.itemView.apply {
-            astroid_date.text =list[position].name
         }
 
 

@@ -49,8 +49,8 @@ interface AstroidApi {
 
     @GET("/neo/rest/v1/feed")
     suspend fun getAstroids3(
-        @Query("start_date") searchTerm: String = "2015-09-07",
-        @Query("end_date") searchTerm2: String = "2015-09-08",
+        @Query("start_date") searchTerm: String = "2022-07-22",
+        @Query("end_date") searchTerm2: String = "2022-07-29",
         @Query("api_key") autheader: String = "$API_KEY"
 
 

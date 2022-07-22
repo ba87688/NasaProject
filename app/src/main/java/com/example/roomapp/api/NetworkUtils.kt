@@ -2,10 +2,8 @@ package com.example.roomapp.api
 
 
 import android.content.ContentValues.TAG
-import android.os.Parcelable
 import android.util.Log
 import com.example.astroidnasa.retrofitmodels.AstroidApiModel
-import com.example.roomapp.model.Astroid
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -60,11 +58,11 @@ fun parseAstroid(a: AstroidApiModel): MutableList<AstroidMade> {
 }
 
 
-fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
+fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Astroid> {
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
     Log.i(TAG, "onCreateView1 inside method: ${nearEarthObjectsJson}")
 
-    val asteroidList = ArrayList<Asteroid>()
+    val asteroidList = ArrayList<Astroid>()
 
     val nextSevenDaysFormattedDates = getNextSevenDaysFormattedDates()
     for (formattedDate in nextSevenDaysFormattedDates) {
@@ -89,7 +87,7 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
                 val isPotentiallyHazardous = asteroidJson
                     .getBoolean("is_potentially_hazardous_asteroid")
 
-                val asteroid = Asteroid(
+                val asteroid = Astroid(
                     id, codename, formattedDate, absoluteMagnitude,
                     estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous
                 )

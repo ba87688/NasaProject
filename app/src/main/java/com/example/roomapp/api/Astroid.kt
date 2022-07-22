@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity(tableName = "astroids_table")
-data class Asteroid(
+data class Astroid(
     @PrimaryKey()
     val id: Long,
     @ColumnInfo(name = "code_name")

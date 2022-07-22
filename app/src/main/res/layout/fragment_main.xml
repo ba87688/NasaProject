@@ -8,9 +8,14 @@
    >
 
     <data>
+<!--        <variable-->
+<!--            name="astroidMainViewModel"-->
+<!--            type="com.example.roomapp.viewModel.AstroidMainViewModel" />-->
+
         <variable
-            name="astroidMainViewModel"
-            type="com.example.roomapp.viewModel.AstroidMainViewModel" />
+            name="astroidsViewModel"
+            type="com.example.roomapp.viewmodels.AstroidsViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
