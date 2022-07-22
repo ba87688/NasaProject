@@ -34,8 +34,8 @@ class DetailFragment : Fragment() {
         binding.tvCloseApproachDate.text = args.re.closeApproachDate.toString()
         binding.tvAbsoluteMagnitude.text = args.re.absoluteMagnitude.toString()
         binding.rvEstimatedDiameter.text = args.re.estimatedDiameter.toString()
-        binding.tvRelativeVelocity.text = args.re.kilometerPerSecond.toString()
-        binding.tvDistanceFromEarth.text = args.re.name.toString()
+        binding.tvRelativeVelocity.text = args.re.relativeVelocity.toString()
+        binding.tvDistanceFromEarth.text = args.re.distanceFromEarth.toString()
 
 
 

@@ -50,7 +50,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.log
 
-class MainFragment : Fragment(), AstroidAdapter2.OnItemClickListener,
+class MainFragment : Fragment(), AdapterClassic.OnItemClickListener,
     AstroMadeAdapter.OnItemClickListener {
 
     var list2:List<Astroid> = mutableListOf()
@@ -151,7 +151,7 @@ class MainFragment : Fragment(), AstroidAdapter2.OnItemClickListener,
                 Log.i(TAG, "Checking live data: ${result.data}")
                 list2 = result.data!!
 
-                adapter = AdapterClassic(list2)
+                adapter = AdapterClassic(result.data!!,this@MainFragment)
                 recyclerview.adapter = adapter
             }
 
@@ -219,16 +219,14 @@ lifecycleScope.launch {
     }
 
     override fun onItemClick(position: Int) {
-//        Log.i(ContentValues.TAG, "onItemClick: $position")
+        Log.i(ContentValues.TAG, "onItemClick: $position")
 //        Log.i(ContentValues.TAG, "onItemClick: ${r?.get(position)}")
 
         var str = "edit the string $position"
 
         var astrpod = list2.get(position)
-
-//        val action = MainFragmentDirections.actionMainFragmentToDetailFragment(astrpod)
-//        view?.findNavController()?.navigate(R.id.action_mainFragment_to_detailFragment)
-//        view?.findNavController()?.navigate(action)
+        val action = MainFragmentDirections.actionMainFragmentToDetailFragment(astrpod)
+        view?.findNavController()?.navigate(action)
 
 
     }
