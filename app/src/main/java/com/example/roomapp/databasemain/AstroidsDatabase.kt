@@ -6,7 +6,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.roomapp.api.Astroid
-import com.example.roomapp.database3.AstroidsDao
+import com.example.roomapp.databasemain.AstroidsDao
 import com.example.roomapp.images.ImageOfTheDay
 
 

@@ -1,4 +1,4 @@
-package com.example.roomapp.database3
+package com.example.roomapp.databasemain
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.roomapp.api.Astroid
-import com.example.roomapp.api.AstroidMade
 import com.example.roomapp.images.ImageOfTheDay
 import kotlinx.coroutines.flow.Flow
 

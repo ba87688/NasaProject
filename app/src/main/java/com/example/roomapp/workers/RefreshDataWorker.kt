@@ -5,7 +5,8 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidMadeDatabase.Companion.getDatabase
-import com.example.roomapp.repository.AstroidRepository
+import com.example.roomapp.repository.AstroidsRepository
+import com.example.roomapp.repository.UsedRepo
 import retrofit2.HttpException
 
 class RefreshDataWorker(appContext: Context, params: WorkerParameters):
@@ -19,7 +20,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters):
 
     override suspend fun doWork(): Result {
         val database = getDatabase(applicationContext)
-        val repository = AstroidRepository(database)
+        val repository = UsedRepo(database)
 
         return try{
             var data = repository.getAstroid()

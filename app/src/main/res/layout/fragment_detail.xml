@@ -9,7 +9,7 @@
 
         <variable
             name="astroidMainViewModel"
-            type="com.example.roomapp.viewModel.AstroidMainViewModel" />
+            type="com.example.roomapp.viewmodels.ViewModelAstroidMade" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

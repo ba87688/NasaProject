@@ -1,4 +1,4 @@
-package com.example.roomapp.viewModel
+package com.example.roomapp.viewmodels
 
 import android.app.Application
 import android.util.Log
@@ -7,15 +7,15 @@ import com.example.astroidnasa.retrofitmodels.AstroidApiModel
 import com.example.roomapp.api.AstroidMade
 import com.example.roomapp.api.parseAstroid
 import com.example.roomapp.database.AstroidMadeDatabase
-import com.example.roomapp.repository.AstroidRepository
+import com.example.roomapp.repository.UsedRepo
 import kotlinx.coroutines.*
 
-class AstroidMainViewModel(
+class ViewModelAstroidMade(
     val database: AstroidMadeDatabase, application: Application
 ) : AndroidViewModel(application) {
 
 
-    private var repository: AstroidRepository = AstroidRepository(database)
+    private var repository: UsedRepo = UsedRepo(database)
     private lateinit var s: AstroidApiModel
 
 

@@ -10,11 +10,11 @@
     <data>
 <!--        <variable-->
 <!--            name="astroidMainViewModel"-->
-<!--            type="com.example.roomapp.viewModel.AstroidMainViewModel" />-->
+<!--            type="com.example.roomapp.viewmodels.AstroidMainViewModel" />-->
 
         <variable
             name="astroidsViewModel"
-            type="com.example.roomapp.viewmodels.AstroidsViewModel" />
+            type="com.example.roomapp.viewmodels.MainAstroidsViewModel" />
 
     </data>
 

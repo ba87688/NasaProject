@@ -10,29 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
-import androidx.room.Room
-import com.example.astroidnasa.network.RetrofitInstance
 import com.example.roomapp.R
 import com.example.roomapp.adapters.AstroMadeAdapter
 import com.example.roomapp.adapters.AdapterClassic
 import com.example.roomapp.api.*
 import com.example.roomapp.database.AstroidsDatabase
 import com.example.roomapp.databinding.FragmentMainBinding
-import com.example.roomapp.repository.AstroidsRepository
-import com.example.roomapp.viewmodels.AstroidsViewModel
+import com.example.roomapp.viewmodels.MainAstroidsViewModel
 import com.example.roomapp.viewmodels.AstroidsViewModelFactory
-import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import java.text.SimpleDateFormat
+
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MainFragment : Fragment(), AdapterClassic.OnItemClickListener,
     AstroMadeAdapter.OnItemClickListener {
@@ -64,14 +54,14 @@ class MainFragment : Fragment(), AdapterClassic.OnItemClickListener,
 //        val astroidTrackerViewModel =
 //            ViewModelProvider(this, viewModelFactory).get(AstroidMainViewModel::class.java)
         val astroidTrackerViewModel =
-            ViewModelProvider(this, viewModelFactory).get(AstroidsViewModel::class.java)
+            ViewModelProvider(this, viewModelFactory).get(MainAstroidsViewModel::class.java)
 
         binding.setLifecycleOwner(this)
 
         binding.astroidsViewModel = astroidTrackerViewModel
 
 
-        var v = ViewModelProvider(this).get(AstroidsViewModel::class.java)
+        var v = ViewModelProvider(this).get(MainAstroidsViewModel::class.java)
 
 
 
@@ -109,58 +99,6 @@ class MainFragment : Fragment(), AdapterClassic.OnItemClickListener,
             }
 
             }
-
-
-
-lifecycleScope.launch {
-        withContext(Dispatchers.IO){
-
-            val formattedDateList = ArrayList<String>()
-
-            val calendar = Calendar.getInstance()
-            for (i in 0..Constants.DEFAULT_END_DATE_DAYS) {
-                val currentTime = calendar.time
-                val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
-                formattedDateList.add(dateFormat.format(currentTime))
-                calendar.add(Calendar.DAY_OF_YEAR, 1)
-            }
-
-            Log.i(ContentValues.TAG, "onCreateView1: $formattedDateList")
-            Log.i(ContentValues.TAG, "onCreateView1: ${formattedDateList.first()}")
-            Log.i(ContentValues.TAG, "onCreateView1: ${formattedDateList.last()}")
-
-            val red= RetrofitInstance.api1.getAstroids3(formattedDateList.first(),formattedDateList.last())
-            val red1= RetrofitInstance.api1.getAstroids2()
-            Log.i(ContentValues.TAG, "onCreateView1: fragment 2 ${red}")
-            val you= Gson().toJson(red)
-            val you1 = JSONObject(you)
-
-
-
-            val pased = parseAsteroidsJsonResult(you1)
-
-            Log.i(ContentValues.TAG, "onCreateView1: fragment 2 ${pased.toString()}")
-
-
-
-
-
-
-            val database =  Room.databaseBuilder(requireContext(), AstroidsDatabase::class.java, "astroids_data").allowMainThreadQueries().build()
-
-            //adding
-            val rep = AstroidsRepository(database)
-
-            val item = Astroid(111,"RED","ree",44.44,33.3,44.44,55.55,true)
-
-            rep.insert(item)
-            val crazy = database.assDatabaseDao.get(111)
-
-            Log.i(TAG, "getRealParsedResponse: ${crazy.id} ")
-        }
-
-
-    }
 
 
 

@@ -33,7 +33,10 @@ class AstroidsRepository(private val database: AstroidsDatabase) {
         fetch = {
             var pr : ArrayList<Astroid> = arrayListOf()
             withContext(Dispatchers.IO) {
-                val data = service.getAstroids3()
+                val formattedDateList = getRealParsedResponse()
+
+
+                val data = service.getAstroids3(formattedDateList.first(),formattedDateList.last())
                 val you = Gson().toJson(data)
                 val you1 = JSONObject(you)
                 val pr1 = parseAsteroidsJsonResult(you1)
@@ -117,8 +120,7 @@ class AstroidsRepository(private val database: AstroidsDatabase) {
 
 
 
-    suspend fun getRealParsedResponse(){
-        withContext(Dispatchers.IO){
+    suspend fun getRealParsedResponse() :ArrayList<String>{
 
             val formattedDateList = ArrayList<String>()
 
@@ -134,21 +136,11 @@ class AstroidsRepository(private val database: AstroidsDatabase) {
             Log.i(ContentValues.TAG, "onCreateView1: ${formattedDateList.first()}")
             Log.i(ContentValues.TAG, "onCreateView1: ${formattedDateList.last()}")
 
-            val red= RetrofitInstance.api1.getAstroids3(formattedDateList.first(),formattedDateList.last())
-            val red1= RetrofitInstance.api1.getAstroids2()
-            Log.i(ContentValues.TAG, "onCreateView1: fragment 2 ${red}")
-            val you= Gson().toJson(red)
-            val you1 = JSONObject(you)
+
+            return formattedDateList
 
 
 
-            val pased = parseAsteroidsJsonResult(you1)
-
-            Log.i(ContentValues.TAG, "onCreateView1: fragment 2 ${pased.toString()}")
-
-
-
-        }
 
 
     }

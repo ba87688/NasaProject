@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AstroidRepository(private val database: AstroidMadeDatabase) {
+class UsedRepo(private val database: AstroidMadeDatabase) {
 
     val service = RetrofitInstance.api1
     val astroids: LiveData<List<AstroidMade>> = database.assDatabaseDao.getAllNights()
