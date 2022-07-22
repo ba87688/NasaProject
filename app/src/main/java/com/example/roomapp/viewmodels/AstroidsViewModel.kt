@@ -30,18 +30,6 @@ class AstroidsViewModel(
         get() = _url
     private val _url = MutableLiveData<String>()
 
-    val explination: LiveData<String>
-        get() = _explination
-    private val _explination = MutableLiveData<String>()
-
-    val title: LiveData<String>
-        get() = _title
-    private val _title = MutableLiveData<String>()
-
-//    val videolist:LiveData<List<AstroidMade>>
-//        get() = _astroidList
-//    private val _astroidList = MutableLiveData<List<AstroidMade>>()
-//
 
     init {
 

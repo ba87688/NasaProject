@@ -1,4 +1,4 @@
-package com.example.roomapp.adapter
+package com.example.roomapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import com.example.roomapp.R
 import com.example.roomapp.api.AstroidMade
 import kotlinx.android.synthetic.main.astroid_list.view.*
 //, private val listener: AstroMadeAdapter.OnItemClickListener
-class AstroMadeAdapter (val list:List<AstroidMade>, private val listener: AstroMadeAdapter.OnItemClickListener):
+class AstroMadeAdapter (val list:List<AstroidMade>, private val listener: OnItemClickListener):
         RecyclerView.Adapter<AstroMadeAdapter.AstroMadeViewHolder2>(){
         private var list2:List<AstroidMade> = mutableListOf()
         inner class AstroMadeViewHolder2(itemView: View): RecyclerView.ViewHolder(itemView),

@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.astroidnasa.retrofitmodels.X20150907
 import com.example.roomapp.R
-import com.example.roomapp.adapter.AstroMadeAdapter
 import com.example.roomapp.api.Astroid
 import kotlinx.android.synthetic.main.astroid_list.view.*
 

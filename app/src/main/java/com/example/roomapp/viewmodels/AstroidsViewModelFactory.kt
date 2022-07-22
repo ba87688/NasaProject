@@ -3,7 +3,6 @@ package com.example.roomapp.viewmodels
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.roomapp.database.AssInterfaceDao
 import com.example.roomapp.database.AstroidMadeDatabase
 import com.example.roomapp.database.AstroidsDatabase
 import com.example.roomapp.database2.AstroidMadeDao
